@@ -6,7 +6,6 @@
     <hr>
     <?php if($errors->any()): ?>
         <div class="notification is-warning">
-            <button class="delete"></button>
             Something has gone wrong...
             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <ul>
@@ -48,7 +47,7 @@
         </div>
         <div class="field">
             <div class="control">
-                <input type="file" name="image_path" class="file">
+                <input type="file" name="image_filename" class="file">
             </div>
         </div>
         <button type="submit" class="button mt-4 is-link is-rounded">SUBMIT POST</button>

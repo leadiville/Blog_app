@@ -20,7 +20,7 @@ class PostController extends Controller
     public function index()
     {
         return view('blog.index', [
-            'posts' => Post::orderBy('created_at', 'desc')->select('id','title','excerpt','body','user_id','is_published','min_to_read','created_at','image_filename',)->paginate(5),
+            'posts' => Post::orderBy('created_at', 'desc')->select('id', 'title', 'excerpt', 'body', 'user_id', 'is_published', 'min_to_read', 'created_at', 'image_filename',)->paginate(5),
 
         ]);
     }
@@ -50,17 +50,17 @@ class PostController extends Controller
             'excerpt' => $request->excerpt,
             'user_id' => Auth::user()->id,
         ]);
-     
-    
-        return redirect(route('blog.index'));
+
+
+        return redirect(route('blog.index'))->with('create_message', 'A new post ' . $request->title . ' has been created successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-   
+
     public function show(string $id)
-    {   
+    {
         return view('blog.show', [
             'selected_post' => Post::where('id', $id)->first(),
         ]);
@@ -87,7 +87,7 @@ class PostController extends Controller
         // dd($request->all());
         Post::where('id', $id)->update($request->except(['_token', '_method', 'image_filename']));
 
-        return redirect(route('blog.index'));
+        return redirect(route('blog.index'))->with('update_message', "Post has been updated successfully!");
     }
 
     /**
@@ -95,9 +95,9 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        Post::destroy($id);
 
-        return redirect(route('blog.index'))->with('message', 'Post deleted successfully!');
+        Post::destroy($id);
+        return redirect(route('blog.index'))->with('destroy_message', ' Post has been deleted!');
     }
 
     // private function storeImage($request)
@@ -105,12 +105,14 @@ class PostController extends Controller
     //     $newImageName = strtolower(uniqid() . '-' . str_replace(" ", "-", $request->title) . "." . $request->image->extension());
     //     return $request->image->move(public_path('images'), $newImageName);
     // }
-    private function storeImage($request) 
+    private function storeImage($request)
     {
-        $new_image_title = strtolower(str_replace(" ", "-", $request->title) . "." . $request->image->extension() );
-        $request->image->move(public_path('images'), $new_image_title);
-        return $new_image_title;
-
+        if (isset($request->image_filename)) {
+            $new_image_title = strtolower(str_replace(" ", "-", $request->title) . "." . $request->image->extension());
+            $request->image->move(public_path('images'), $new_image_title);
+            return $new_image_title;
+        } else 
+        return "";
     }
 }
 // include('blog/blogParts/index');

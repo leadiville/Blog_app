@@ -6,7 +6,6 @@
     <hr>
     @if ($errors->any())
         <div class="notification is-warning">
-            <button class="delete"></button>
             Something has gone wrong...
             @foreach ($errors->all() as $error)
                 <ul>

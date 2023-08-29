@@ -29,7 +29,7 @@ class PostFormRequest extends FormRequest
             'image' => 'mimes:jpg,jpeg|max:20036',
         ];
         if (in_array($this->method(), ['POST'])) {
-             $posts['image'] = 'required|mimes:jpg,jpeg|max:20036';
+             $posts['image'] = 'mimes:jpg,jpeg|max:20036';
         }
         return $posts;
     }

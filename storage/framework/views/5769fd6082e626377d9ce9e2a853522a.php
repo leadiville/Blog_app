@@ -4,14 +4,23 @@
     <a class="content is-small has-text-primary is-dark ml-0" href="<?php echo e(route('dashboard')); ?>"><i>Go to Dashboard</i></a>
 
 </div>
-<header class="header m-6">
+<header class="header m-6 has-text-centered">
     <h1 class="title">All Articles</h1>
     <hr>
 </header>
-<?php if(session()->has('message')): ?>
-    <div class="notification is-danger">
-        <button class="delete"></button>
-        <?php echo e(session()->get('message')); ?>
+<?php if(session()->has('destroy_message')): ?>
+    <div class="notification is-danger has-text-centered">
+        <?php echo e(session()->get('destroy_message')); ?>
+
+    </div>
+<?php elseif(session()->has('update_message')): ?>
+    <div class="notification is-link has-text-centered">
+        <?php echo e(session()->get('update_message')); ?>
+
+    </div>
+<?php elseif(session()->has('create_message')): ?>
+    <div class="notification is-success has-text-centered">
+        <?php echo e(session()->get('create_message')); ?>
 
     </div>
 <?php else: ?>
@@ -25,16 +34,18 @@
 <?php if(isset($posts)): ?>
 
     <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="card m-6 p-6 has-text-left">
-            <p class="subtitle card-item is-capitalized"><a
-                    href=<?php echo e(route('blog.show', $post->id)); ?>><strong><?php echo e($post->title); ?></strong></a></p>
-            <p class="content card-item is-capitalized"><?php echo e($post->excerpt); ?></p>
-            <p class="content is-small card-item"><strong>Made by: <i
-                        class="has-text-primary"><?php echo e($post->user->name); ?></i>
-                    on:
-                    <?php echo e($post->created_at->format('d/m/Y')); ?></strong></p>
-            </p>
-
+        <div class="card m-6 p-6 has-text-left " onclick="() <?php echo e(route('blog.show', $post->id)); ?>">
+            <a href=<?php echo e(route('blog.show', $post->id)); ?> class="has-text-black">
+                <p class="subtitle card-item is-capitalized">
+                    <strong><?php echo e($post->title); ?></strong>
+                </p>
+                <p class="content card-item is-capitalized"><?php echo e($post->excerpt); ?></p>
+                <p class="content is-small card-item"><strong>Made by: <i
+                            class="has-text-primary"><?php echo e($post->user->name); ?></i>
+                        on:
+                        <?php echo e($post->created_at->format('d/m/Y')); ?></strong></p>
+                </p>
+            </a>
             <br />
         </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

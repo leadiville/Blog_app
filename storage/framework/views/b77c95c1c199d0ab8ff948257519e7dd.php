@@ -7,4 +7,5 @@
 
 </footer>
 
-</ht<?php /**PATH /var/www/html/resources/views/blog/blogParts/foot.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH /var/www/html/resources/views/blog/blogParts/foot.blade.php ENDPATH**/ ?>
