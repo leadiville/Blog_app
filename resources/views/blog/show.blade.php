@@ -20,7 +20,7 @@
                 </li>
             </ul>
         @endforeach
-    @else
+        @else 
         <p class="content is-small has-text-danger pl-6 ">This post does not belong to any category yet!</p>
     @endif
 
