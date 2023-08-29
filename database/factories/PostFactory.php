@@ -2,11 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Http\Controllers\PostController;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -68,7 +66,7 @@ class PostFactory extends Factory
     public function published(): Factory
     {
         return $this->state(function (array $attributes) {
-            return ["is_published" => 1];
+            return ["is_published" => $this->faker->boolean()];
         });
     }
 }

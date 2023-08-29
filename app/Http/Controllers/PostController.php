@@ -43,7 +43,7 @@ class PostController extends Controller
 
         Post::create([
             'title' => $request->title,
-            'is_published' => $request->is_published === 'on',
+            'is_published' => $request->is_published,
             'body' => $request->body,
             'image_filename' => $this->storeImage($request),
             'min_to_read' => $request->min_to_read,
@@ -111,8 +111,8 @@ class PostController extends Controller
             $new_image_title = strtolower(str_replace(" ", "-", $request->title) . "." . $request->image->extension());
             $request->image->move(public_path('images'), $new_image_title);
             return $new_image_title;
-        } else 
-        return "";
+        } else
+            return "";
     }
 }
 // include('blog/blogParts/index');
