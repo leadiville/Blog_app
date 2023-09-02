@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -48,7 +49,7 @@ class PostController extends Controller
             'image_filename' => $this->storeImage($request),
             'min_to_read' => $request->min_to_read,
             'excerpt' => $request->excerpt,
-            'user_id' => Auth::user()->id,
+            'user_id' => $request->user()->id,
         ]);
 
 
@@ -85,7 +86,21 @@ class PostController extends Controller
         $request->validated();
 
         // dd($request->all());
-        Post::where('id', $id)->update($request->except(['_token', '_method', 'image_filename']));
+        // Post::where('id', $id)->update($request->except(['_token', '_method']));
+
+        $post = Post::where('id', $id)->update(
+            [
+               "title" => $request->title,
+               "is_published" => $request->is_published,
+               "body" => $request->body,
+               "image_filename" => $this->updateImage($request),
+               "min_to_read" => $request->min_to_read,
+               "excerpt" => $request->excerpt,
+            ]
+        );
+
+
+
 
         return redirect(route('blog.index'))->with('update_message', "Post has been updated successfully!");
     }
@@ -107,12 +122,26 @@ class PostController extends Controller
     // }
     private function storeImage($request)
     {
-        if (isset($request->image_filename)) {
+        if (isset($request->image)) {
             $new_image_title = strtolower(str_replace(" ", "-", $request->title) . "." . $request->image->extension());
             $request->image->move(public_path('images'), $new_image_title);
             return $new_image_title;
-        } else 
-        return "";
+        } else {
+            return "" ;
+        }
     }
+    private function updateImage($request) {
+        $updated_image = strtolower(str_replace(" ", "-", $request->title)) . "." . $request->image->extension();
+        if(isset($request->image)) {
+            if(File::exists('/public/images/'.$updated_image)) {
+                File::delete('/public/images/'.$updated_image);
+            } else {
+                $request->image->move(public_path('images'), $updated_image);
+                return $updated_image;
+            }
+        } else {
+            return "" ;
+        }
+    }
+    // include('blog/blogParts/index');
 }
-// include('blog/blogParts/index');

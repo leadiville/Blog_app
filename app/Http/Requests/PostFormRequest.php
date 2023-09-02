@@ -26,10 +26,10 @@ class PostFormRequest extends FormRequest
             'excerpt' => 'max:3000',
             'body' => 'required',
             'min_to_read' => 'required|min:1|max:50',
-            'image' => 'mimes:jpg,jpeg|max:20036',
+            'image_filename' => 'mimes:jpg,jpeg|max:20036',
         ];
         if (in_array($this->method(), ['POST'])) {
-             $posts['image'] = 'mimes:jpg,jpeg|max:20036';
+             $posts['image'] = 'mimes:jpg,jpeg,png,pd|max:20036';
         }
         return $posts;
     }

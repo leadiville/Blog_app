@@ -1,3 +1,5 @@
+
+
 <nav class="pagination p-6" role="navigation">
     <a class="pagination-next"
         href={{ $posts->links()->paginator->path() . '?page=' . $posts->links()->paginator->currentPage() + 1 }}>Next</a>
@@ -7,7 +9,8 @@
         @foreach ($posts->links()->elements[0] as $key => $value)
             <li>
                 <a href={{ $value }}
-                    class="pagination-link {{ $posts->links()->paginator->currentPage() === $key ? 'button is-primary' : '' }}">{{ $key }}</a>
+                    class="pagination-link {{ $posts->links()->paginator->currentPage() === $key ? 'button is-primary' : '' }}">
+                    {{ $key }}</a>
             </li>
         @endforeach
     </ul>

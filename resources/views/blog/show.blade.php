@@ -28,7 +28,7 @@
     <p class="content is-small mt-2 mb-2">{{ $selected_post->body }}</p>
     <br />
     <img class="image" src={{ asset('images/' . $selected_post->image_filename) }}
-        alt="image for {{ $selected_post->title }}" width='400' height='350'>
+        alt="image for {{ $selected_post->title }}" width='400' height='350' >
     @if (Auth::id() === $selected_post->user_id)
         <div class="content is-flex pb-6">
             <a class="button mt-2 card-item has-text-primary"

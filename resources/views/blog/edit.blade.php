@@ -47,7 +47,7 @@
         </div>
         <div class="field">
             <div class="control">
-                <input type="file" name="image_filename" class="file">
+                <input type="file" name="image" class="file">
             </div>
         </div>
         <button type="submit" class="button mt-4 is-link is-rounded">SUBMIT POST</button>
