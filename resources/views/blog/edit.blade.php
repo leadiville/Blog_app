@@ -1,6 +1,7 @@
 -- Active: 1692575068306@@127.0.0.1@3306@blog_posts
-@include('blog/blogParts/head')
+@extends("blog.template")
 
+@section('content')
 <div class="container m-6">
     <h1 class="title">Edit post</h1>
     <hr>
@@ -53,4 +54,4 @@
         <button type="submit" class="button mt-4 is-link is-rounded">SUBMIT POST</button>
     </form>
 </div>
-
+@endsection

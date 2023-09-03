@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,5 +8,17 @@
     <title>Blog Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet" />
 </head>
+
 <body class="body">
-        <div class="container">
+    <div class="container">
+        <article>
+            @yield('content')
+        </article>
+    </div>
+</body>
+<footer class="footer ">
+
+</footer>
+
+</html>
+{{-- {{ dd($posts->links()) }} --}}

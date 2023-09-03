@@ -1,5 +1,7 @@
-@include('blog/blogParts/head')
 
+@extends('blog.template')
+
+@section('content')
 <div class="content has-text-left pt-6 is-capitalized">
     <a class="content is-small has-text-primary has-icon-left mb-6" href={{ route('blog.index') }}><i>Go to all
             Posts</i></a>
@@ -42,3 +44,4 @@
         </div>
     @endif
 </div>
+@endsection

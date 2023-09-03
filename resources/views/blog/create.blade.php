@@ -1,5 +1,7 @@
-@include('blog/blogParts/head')
-<div class="container m-6">
+@extends("blog.template")
+
+@section('content')
+<div class="container m-6">`
     <h1 class="title">Add new post</h1>
     <hr>
     @if ($errors->any())
@@ -56,3 +58,4 @@
         <button type="submit" class="button mt-4 is-link is-rounded">SUBMIT POST</button>
     </form>
 </div>
+@endsection
